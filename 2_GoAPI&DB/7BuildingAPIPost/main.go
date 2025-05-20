@@ -1,0 +1,68 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
+)
+
+type person struct {
+	Name string
+	Age  int
+}
+
+var users []person
+
+type Message struct {
+	Status   string `json:"status"`
+	Messages string `json:"Messages"`
+}
+
+func main() {
+	fmt.Println("-----< Post Request API Building >-----")
+	r := mux.NewRouter()
+	// r := mux.NewRouter()
+	// r.HandleFunc("/user", handlePostUser).Methods("POST")
+	r.HandleFunc("/UserPost", handlePostUser).Methods("POST")
+	r.HandleFunc("/UserInfo", GetUserData).Methods("GET")
+
+	log.Println("🚀 Server running on http://localhost:3080")
+	log.Fatal(http.ListenAndServe(":3080", r))
+}
+
+func handlePostUser(w http.ResponseWriter, r *http.Request) {
+	//Parse json
+	var user person
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+
+	// Validate the fields
+	if user.Name == "" || user.Age <= 0 {
+		http.Error(w, "Name and Age values are invalid", http.StatusBadRequest)
+		return
+	}
+	// store post values in Memory
+	users = append(users, user)
+
+	// Build and send response
+	response := Message{
+		Status:   "Success",
+		Messages: "The user name is  " + user.Name + " User Age is " + strconv.Itoa(user.Age),
+	}
+	w.Header().Set("content-type", "Application/json")
+	json.NewEncoder(w).Encode(response)
+
+}
+
+func GetUserData(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "Application/json")
+	json.NewEncoder(w).Encode(users)
+
+}

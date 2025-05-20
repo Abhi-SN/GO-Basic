@@ -1,0 +1,38 @@
+        Start Program
+              │
+              ▼
+       Shared Resource: tickets = 10
+              │
+              ▼
+     ┌────────┴────────┐
+     ▼                 ▼
+[ Goroutine A ]   [ Goroutine B ]
+     │                 │
+     ▼                 ▼
+ mu.Lock()         mu.Lock()  ← blocked until A is done
+     │
+     ▼
+Access & update tickets
+     │
+     ▼
+ mu.Unlock()
+     │
+     ▼
+Goroutine B acquires lock
+     │
+     ▼
+Access & update tickets
+     │
+     ▼
+ mu.Unlock()
+
+
+time line
+Time →
+────────────────────────────────────────────────────────>
+
+Goroutine A: ── Lock ── Access ── Unlock ───────────────>
+
+Goroutine B: ────────── Wait ── Lock ── Access ── Unlock
+
+Goroutine C: ───────────────────── Wait ── Lock ── ...

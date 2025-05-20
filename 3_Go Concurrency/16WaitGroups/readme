@@ -1,0 +1,26 @@
+Customer Places Order
+          │
+          ▼
+  Initialize WaitGroup
+          │
+          ▼
+  Add 4 tasks to WaitGroup (Add(4))
+          │
+          ▼
+ +────────+────────────+────────────+
+ │        │            │            │              
+ ▼        ▼            ▼            ▼              
+Send   Process     Prepare       Generate      (Each task
+Email  Payment     Shipment      Invoice       runs in a
+                                              goroutine &
+                                               calls Done)
+ │        │            │            │
+ ▼        ▼            ▼            ▼
+Done()  Done()       Done()       Done()
+ └────────┴────────────┴────────────┘
+          │
+          ▼
+     WaitGroup.Wait()
+          │
+          ▼
+ All Tasks Completed → Mark Order as Processed

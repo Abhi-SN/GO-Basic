@@ -1,0 +1,60 @@
+## Covered Topics
+
+### Basics
+- Hello World
+- Variables and Constants
+- Data Types (int, string, float, etc.)
+- Control Flow (if, switch)
+- Loops (for, range)
+- Functions and Parameters
+- Error Handling (error type)
+- Arrays & Slices
+- Maps
+- Structs & Methods
+
+### Concurrency
+- Goroutines
+- Channels
+- WaitGroups
+- Mutexes
+- Race Conditions & Deadlocks
+- Context Package (timeout/cancel)
+
+### API and Database 
+- HTTP Server with net/http
+- Routing with custom handlers
+- Handling JSON (Request & Response)
+- CRUD Operations (GET, POST, PUT, DELETE)
+- Modular API folder structure
+- Status codes and error handling
+- Connecting with database/sql
+- Using go-sql-driver/mysql
+- Executing Queries (SELECT, INSERT, UPDATE, DELETE)
+- Scanning rows into structs
+
+
+
+## Basic commands
+- Install Go (Download from https://golang.org/dl/)
+- Set up GOPATH and GOROOT if needed
+
+## Module Initialization
+- go mod init <module-name>       # Initialize a Go module (creates go.mod)
+- go mod tidy                     # Clean up unused packages
+
+## Running Code
+- go run <filename>.go            # Run a single Go file
+- go run .                        # Run all files in the current folder (main package)
+
+
+## Building Executables
+- go build                        # Compile the Go code in current directory
+- go build -o myapp               # Compile and create binary named 'myapp'
+
+## Installing Packages
+- go get <package>                # Download and install third-party packages
+
+
+## Clean & Cache
+- go clean                        # Remove object files
+- go clean -modcache              # Clear module download cache

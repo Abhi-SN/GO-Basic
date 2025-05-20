@@ -1,0 +1,16 @@
+go-api/
+│
+├── main.go
+├── go.mod
+│
+├── config/
+│   └── db.go               # DB connection logic
+│
+├── models/
+│   └── user.go             # User struct and DB operations
+│
+├── handlers/
+│   └── userHandler.go      # HTTP Handlers (GET, POST, PUT, DELETE)
+│
+├── routes/
+│   └── routes.go           # Routing logic using mux
