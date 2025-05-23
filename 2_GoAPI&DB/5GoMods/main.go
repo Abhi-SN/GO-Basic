@@ -17,7 +17,7 @@ func main() {
 }
 
 func Greeter() {
-	fmt.Println("Welcome to GO lang video")
+	fmt.Println("Welcome to GOlang")
 }
 
 func serverHome(w http.ResponseWriter, r *http.Request) {
